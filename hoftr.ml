@@ -77,3 +77,8 @@ let () =
 
   assert (compose_all [(fun x -> x + 1); (fun x -> x * 3)] 5 = 16);
   assert (compose_all [] 3 = 3);
+
+  assert (run_length_decode [('a',5); ('b',3)] = ['a';'a';'a';'a';'a';'b';'b';'b']);
+  assert (run_length_decode [] = []);
+
+
