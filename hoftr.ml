@@ -66,6 +66,9 @@ let () =
 
   assert (repeat 'a' 5 = ['a';'a';'a';'a';'a']);
   assert (repeat 'a' 0 = []);
-  assert (repeat 'a' (-1) = [])
+  assert (repeat 'a' (-1) = []);
+
+  let f x = x *. x in
+  assert (Float.abs (derive f 3.0 -. 6.0) < 1e-5)
 
 
