@@ -64,4 +64,8 @@ let () =
   assert (vector_add [] [] = []);
   assert (try let _ = vector_add [1;2] [1;2;3] in false with UnequalLengths -> true);
 
+  assert (repeat 'a' 5 = ['a';'a';'a';'a';'a']);
+  assert (repeat 'a' 0 = []);
+  assert (repeat 'a' (-1) = [])
+
 
