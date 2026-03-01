@@ -83,11 +83,18 @@ let safe (b : board) (c : int) : bool =
 
 (* Extend a partial board by adding one queen in a safe column *)
 let extend_board (n : int) (b : board) : board list =
-  raise Util.Unimplemented
+  range n
+  |> List.filter (fun col -> safe b col)
+  |> List.map (fun col -> b @ [col])
 
 (* Solves the n-queens problem *)
 let solve_nqueens (n : int) : board list =
-  raise Util.Unimplemented
+  range n
+  |> List.fold_left (fun curr_boards _ ->
+      curr_boards
+      |> List.map (fun board -> extend_board n board)
+      |> List.flatten
+  ) [[]]
 
 (* Number of solutions *)
 let count (n : int) : int =
