@@ -73,7 +73,7 @@ let () =
 
   assert (matrix_valid [[3;4]; [5;6]] = true);
   assert (matrix_valid [[9;9]; [10]] = false);
-  assert (matrix_valid [[]] = false);
+  assert (matrix_valid [] = false);
 
   assert (compose_all [(fun x -> x + 1); (fun x -> x * 3)] 5 = 16);
   assert (compose_all [] 3 = 3);
