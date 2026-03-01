@@ -112,7 +112,16 @@ let main () =
   let sols = solve_nqueens n in
   Printf.printf "Number of solutions for n=%d: %d\n\n" n (List.length sols);
   Printf.printf "All solutions valid? %b\n\n" (is_board_list_valid sols);
-  Printf.printf "All solutions unique? %b\n\n" (is_board_list_all_unique sols)
+  Printf.printf "All solutions unique? %b\n\n" (is_board_list_all_unique sols);
   (* try List.iter (print_board_pretty n) sols *)
+  (*List.iter (print_board_pretty n) sols; *)
+  let partial_board = extend_board 4 [1;3] in
+  Printf.printf "Extend board solutions value? %b\n" (is_board_list_valid partial_board);
+  Printf.printf "Extend board solutions unique? %b\n" (is_board_list_all_unique partial_board);
+
+  let sol_f2 = solve_nqueens 2 in
+  let sol_f3 = solve_nqueens 3 in
+  Printf.printf "Number of solutions for 2: %d\n" (List.length sol_f2);
+  Printf.printf "num solutions for 3: %d\n" (List.length sol_f3)
 
 let _ = main ()
