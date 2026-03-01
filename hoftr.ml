@@ -29,10 +29,14 @@ let for_all (f : 'a -> bool) (l : 'a list) : bool =
   List.fold_left (fun acc ele -> acc && (f ele)) true l
   
 let matrix_valid (mat : int list list ) : bool = 
-  raise Util.Unimplemented
+  match mat with
+  | [] -> false
+  | row :: _ ->
+      let length = List.length row in
+      for_all (fun curr -> List.length curr = length) mat
 
 let compose_all (fns : ('a -> 'a) list) : ('a -> 'a) =
-  raise Util.Unimplemented
+  List.fold_right (fun f acc -> (fun x -> f (acc x))) fs (fun x -> x)
 
 let run_length_decode (l: (char * int) list) : char list =
   raise Util.Unimplemented
