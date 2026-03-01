@@ -268,17 +268,47 @@ let rec fold_expr (e : expression)
       (v: 'a)
       (b: binop -> 'a -> 'a -> 'a)
       (n: 'a -> 'a) =
-  raise Util.Unimplemented
+  match e with
+  | Num (value) -> f value
+  | Var -> v
+  | Binop (op, e1, e2) -> b op (fold_expr e1 f v b n) (fold_expr e2 f v b n)
+  | Neg (e1) -> n (fold_expr e1 f v b n)
 
 let rec contains_var (e:expression) : bool =
-  raise Util.Unimplemented
+  fold_expr e 
+    (fun _ -> false) 
+    true 
+    (fun _ e1 e2 -> e1 || e2) 
+    (fun res -> res)
 
 let rec evaluate (e:expression) (x:float) : float =
-  raise Util.Unimplemented
+  fold_expr e
+    (fun f -> f)
+    x
+    (fun op e1 e2 ->
+      match op with
+      | Add -> e1 +. e2
+      | Sub -> e1 -. e2
+      | Mul -> e1 *. e2
+      | Pow -> e1 ** e2
+    )
+    (fun value -> -. value)
 
 exception NotPolynomial
 
 let rec derivative (e: expression) : expression =
   raise Util.Unimplemented
 
+let () =
+  assert (contains_var (parse "3.14") = false);
+  assert (contains_var (parse "x") = true);
+  assert (contains_var (parse "3.14 + x") = true);
+  assert (contains_var (parse "~x^2 + 3.14") = true);
+  Printf.printf "contains_var tests pass\n";
 
+  let expr = parse "~3.0 * x^2 + x + 2.0" in
+  assert (floats_close (evaluate expr 0.0) 2.0);
+  assert (floats_close (evaluate expr 1.0) 0.0);
+  assert (floats_close (evaluate expr (-2.0)) (-12.0));
+  Printf.printf "evaluate tests pass\n";
+  Printf.printf "fold_expr implicitly passes\n"
