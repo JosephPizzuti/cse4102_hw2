@@ -6,10 +6,11 @@
 exception UnequalLengths
 
 let vector_add (v1 : int list) (v2 : int list) : int list =
-  let rec aux v1 v2 acc =
-    match v1, v2 with
+  let rec aux l1 l2 acc =
+    match l1, l2 with
     | [], [] -> acc
-    | (h1:t1), (h2:t2) -> aux t1 t2 (h1+h2)::acc
+    | h1::t1, h2::t2 -> aux t1 t2 ((h1+h2)::acc)
+    | _ -> acc
   in List.rev (aux v1 v2 [])
 
 let repeat (c: char) (n: int) : char list =
