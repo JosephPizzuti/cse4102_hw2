@@ -23,7 +23,7 @@ let repeat (c: char) (n: int) : char list =
 
 let derive (f : float -> float) : (float -> float) = 
   let epsilon = 1e-8 in
-  raise Util.Unimplemented
+    (fun x -> ((f (x +. epsilon)) -. (f x)) /. epsilon)
 
 let for_all (f : 'a -> bool) (l : 'a list) : bool =
   raise Util.Unimplemented
