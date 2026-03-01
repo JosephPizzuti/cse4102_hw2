@@ -81,4 +81,8 @@ let () =
   assert (run_length_decode [('a',5); ('b',3)] = ['a';'a';'a';'a';'a';'b';'b';'b']);
   assert (run_length_decode [] = []);
 
+  assert (run_length_encode ['a'; 'a'; 'a'; 'a'; 'a'; 'b'; 'b'; 'b'] = [('a', 5); ('b', 3)]);
+  assert (run_length_encode ['a'; 'a'; 'b'; 'b'; 'b'; 'a'] = [('a', 2); ('b', 3); ('a', 1)]);
+  assert (run_length_encode [] = []);
+
 
