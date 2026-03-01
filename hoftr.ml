@@ -69,6 +69,8 @@ let () =
   assert (repeat 'a' (-1) = []);
 
   let f x = x *. x in
-  assert (Float.abs (derive f 3.0 -. 6.0) < 1e-5)
+  assert (Float.abs (derive f 3.0 -. 6.0) < 1e-5);
 
-
+  assert (matrix_valid [[3;4]; [5;6]] = true);
+  assert (matrix_valid [[9;9]; [10]] = false);
+  assert (matrix_valid [[]] = false);
