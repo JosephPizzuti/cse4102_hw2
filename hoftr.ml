@@ -58,3 +58,10 @@ let run_length_encode (l : char list) : (char * int) list =
 
 let fold_right (f: 'a -> 'b -> 'b) (l: 'a list) (u: 'b) : 'b =
   raise Util.Unimplemented
+
+let () =
+  assert (vector_add [1; 2; 3] [9;7;5] = [10;9;8]);
+  assert (vector_add [] [] = []);
+  assert (try let _ = vector_add [1;2] [1;2;3] in false with UnequalLengths -> true);
+
+
