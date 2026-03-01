@@ -26,7 +26,7 @@ let derive (f : float -> float) : (float -> float) =
     (fun x -> ((f (x +. epsilon)) -. (f x)) /. epsilon)
 
 let for_all (f : 'a -> bool) (l : 'a list) : bool =
-  raise Util.Unimplemented
+  List.fold_left (fun acc ele -> acc && (f ele)) true l
   
 let matrix_valid (mat : int list list ) : bool = 
   raise Util.Unimplemented
