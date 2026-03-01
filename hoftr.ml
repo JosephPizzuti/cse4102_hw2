@@ -10,11 +10,16 @@ let vector_add (v1 : int list) (v2 : int list) : int list =
     match l1, l2 with
     | [], [] -> acc
     | h1::t1, h2::t2 -> aux t1 t2 ((h1+h2)::acc)
-    | _ -> acc
-  in List.rev (aux v1 v2 [])
+    | _ -> raise UnequalLengths
+  in 
+  List.rev (aux v1 v2 [])
 
 let repeat (c: char) (n: int) : char list =
-  raise Util.Unimplemented
+  let rec aux i acc =
+    if i <= 0 then acc
+    else aux (i-1) (c::acc)
+  in 
+  aux n []
 
 let derive (f : float -> float) : (float -> float) = 
   let epsilon = 1e-8 in
