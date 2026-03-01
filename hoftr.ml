@@ -36,7 +36,7 @@ let matrix_valid (mat : int list list ) : bool =
       for_all (fun curr -> List.length curr = length) mat
 
 let compose_all (fns : ('a -> 'a) list) : ('a -> 'a) =
-  List.fold_right (fun f acc -> (fun x -> f (acc x))) fs (fun x -> x)
+  List.fold_right (fun f acc -> (fun x -> f (acc x))) fns (fun x -> x)
 
 let run_length_decode (l: (char * int) list) : char list =
   raise Util.Unimplemented
