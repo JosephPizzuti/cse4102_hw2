@@ -47,7 +47,12 @@ let run_length_encode (l : char list) : (char * int) list =
   | hd::tl -> 
       let first_acc = [(hd, 1)] in 
       let final_acc = List.fold_left (fun acc next_value -> 
-        raise Util.Unimplemented
+        match acc with
+        | (curr, count)::t ->
+            if next_value = curr
+            then (curr, count+1)::t
+            else (next_value, 1)::(curr, count)::t
+        | [] -> [(next_value, 1)]
       ) first_acc tl in 
       List.rev final_acc
 
